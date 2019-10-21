@@ -1,0 +1,28 @@
+<%- include('header'); -%>
+<script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
+<div class="row">
+    <div class="col-lg">
+        <h5>Step 4: <span class="font-weight-normal">Account data for <%= username %>'s Profile</span></h5>
+    </div>
+</div>
+<div class="row">
+     <div class="col-lg">
+         <dl>
+         </dl>
+     </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.js" integrity="sha256-SqYmg/EyKT5LUAp2UdwerRdD81DL7SCgGKRHf9UaDno=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js" integrity="sha256-wLefPvftUZaYEQquDfRpnXG8nkR2o9vutAcDLNe64R0=" crossorigin="anonymous"></script>
+<script>
+ window.account = <%- account %>;
+
+ html = `<dt>id</dt><dd>${account.id}</dd><dt>Account #</dt><dd>${account.accountNumber}</dd><dt>Name</dt><dd>${account.accountName}</dd><dt>Status</dt><dd>${account.accountStatus}</dd><dt></dt>`;
+ if (typeof account.balance !== 'undefined') {
+     html += `<dt>Balance</dt><dd>${accounting.formatMoney(account.balance.amount)}</dd>`
+ }
+ if (typeof account.availableBalance !== 'undefined') {
+     html += `<dt>Available Balance</dt><dd>${accounting.formatMoney(account.availableBalance.amount)}</dd>`
+ }
+ $('dl').append(html)
+</script>
+<%- include('footer'); -%>

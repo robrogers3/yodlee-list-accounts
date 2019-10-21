@@ -1,0 +1,10 @@
+/coverage/
+/node_modules/
+/npm-debug.log
+.env
+.vs/
+.idea/
+*~
+.DS_Store
+*.key
+accounts*.json

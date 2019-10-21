@@ -1,0 +1,73 @@
+<%- include('header'); -%>
+
+<div class="row">
+    <div class="col-lg">
+        <h5 class="mb-3">Step 3: <span class="font-weight-normal">Your done!</span></h5>
+        <h6 class="mt-4 mb-0"><span class="font-weight-normal">Account data for <strong><%= username %>'s</strong> Profile</span></h6>
+        <p class="text-muted"><small>Click on the Account Numbers to get view details.</small></p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg">
+        <table class="table">
+            <thead>
+                <th>Number</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Balance</th>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.json2html/1.2.0/jquery.json2html.js" integrity="sha256-SqYmg/EyKT5LUAp2UdwerRdD81DL7SCgGKRHf9UaDno=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/accounting.js/0.4.1/accounting.min.js" integrity="sha256-wLefPvftUZaYEQquDfRpnXG8nkR2o9vutAcDLNe64R0=" crossorigin="anonymous"></script>
+<script>
+ window.accounts = <%- accounts %>;
+ function buildList(data, $el) {
+     const items = [];
+     const things = ['object','array']
+     $.each( data, function( key, val ) {
+         if (things.includes($.type(val))) {
+             const html = buildList(val, $('<div/>')).html()
+             items.push( `<li class="list-group-item"><strong>${key}</strong>: <ul>${html}</ul> </li>`)
+         } else {
+             items.push( `<li class="list-group-item"><strong>${key}</strong>: <span>${val}</span></li>`)
+         }
+     });
+
+     return $( "<ul/>", {
+         "class": "list-group",
+         html: items.join( "" )
+     })
+ }
+ const loaded = [];
+ $('body').on('click', 'a.account-detail', function (e) {
+     e.preventDefault()
+     if (loaded.includes(this.href)) {
+         return
+     }
+     const $this = $(this)
+     const $row = $this.closest('tr').next('tr').removeClass('hidden')
+     const $el = $row.find('td')
+     $.getJSON(this.href)
+                     .done(data => {
+                         buildList(data, $el).appendTo($el)
+                         loaded.push(this.href);
+                     })
+                     .fail((jqxhr, textStatus, error) => {
+                         var err = textStatus + ", " + error;
+                         console.log( "Request Failed: " + err );
+                         alert( "Request Failed: " + err );
+                     });
+
+})
+ let html = '';
+ window.accounts.account.forEach(account => {
+     html += `<tr><td><a class="account-detail" href="/users/accounts/${account.id}?container=${account.CONTAINER}">${account.accountNumber}</a></td><td>${account.accountName}</td><td>${account.accountType}</td><td>${ typeof account.balance !== 'undefined' ? accounting.formatMoney(account.balance.amount) : ''}</td></tr>`
+     html += `<tr class='hidden'"><td colspan="4"></td></tr>`
+ })
+ $('tbody').append(html)
+</script>
+<%- include('footer'); -%>

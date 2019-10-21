@@ -1,0 +1,65 @@
+<%- include('header'); -%>
+<div class="row">
+    <div class="col-lg">
+        <h5 class="mb-3">Step 2: <span class="font-weight-normal">Link an Account to <%= username %>'s Profile</span></h5>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm">
+        <dl class="my-2">
+            <dt>Launch FastLink</dt>
+            <dd>Launch FastLink by clicking the 'Link Account' button.</dd>
+            <dt>Select a Financial Institution</dt>
+            <dd>Pick a bank or financial institution, or use the search feature below</dd>
+            <dt>Authenticate</dt>
+            <dd>
+                <div>Authenticate with your credentials. Or use a test institution, like "Dag Site"</div>
+                <div class="text-muted"><small>For Dag Site: username = DAGtest.site16441.1, password = site16441.1</small></div>
+            </dd>
+            <dt>View Linked Accounts</dt>
+            <dd>After Launching Fastlink, click 'View Linked Accounts' to see linked accounts</dd>
+        </dl>
+    </div>
+    <div class="col-sm">
+        <div id="container-fastlink">
+            <div style="text-align: center; margin-bottom: 2rem">
+                <input class="btn btn-primary" type="button" id="btn-fastlink" value="Link an Account">
+                <a class="btn btn-primary d-none"  href="/users/accounts" id="close-fastlink">View Linked Accouts</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src='https://cdn.yodlee.com/fastlink/v1/initialize.js'></script>
+<script>
+ (function (window) {
+     //Open FastLink
+     var fastlinkBtn = document.getElementById('btn-fastlink');
+     fastlinkBtn.addEventListener('click', function () {
+         var viewAccountButton = document.getElementById('close-fastlink')
+         viewAccountButton.classList.remove('d-none')
+         <!-- viewAccountButton.addEventListener('click', function() { -->
+             <!--  window.fastlink.close() -->
+             <!-- }, false) -->
+
+         window.fastlink.open({
+             fastLinkURL: '<%= fastlink_url %>',
+             jwtToken: 'Bearer <%= token %>',
+             params: '',
+             onSuccess: function (data) {
+                 console.log('much of this data is valuable and should be saved to the users profile', data);
+             },
+             onError: function (data) {
+                 console.log(data);
+             },
+             onExit: function (data) {
+                 console.log(data);
+             },
+             onEvent: function (data) {
+                 console.log(data);
+             }
+         }, 'container-fastlink');
+     }, false);
+ }(window));
+</script>
+
+<%- include('footer'); -%>
