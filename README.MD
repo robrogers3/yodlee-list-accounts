@@ -1,13 +1,20 @@
-# A Sample App to List A Users Linked Accounts
+# A Yodlee Web App to Link and List a Users Accounts
+
+## Web App Features
+
+* Yodlee Fastlink Implementation
+* Listing a Users Linked Accounts
+* View details of a selected Account
+
 
 ## Installation
 
 ```
-git clone https://github.com/robrogers3/sample-app
+git clone https://github.com/robrogers3/yodlee-list-accounts.git
 
-cd nodejs
+cd yodlee-list-accounts
 
-cp .env.sample .env
+cp .env.example .env
 
 npm install
 
@@ -15,20 +22,18 @@ npm install
 
 ## Running the App
 
-**First update your issuer_id in the .env file**
+**You must update the .env file with**
+
+* Your issuer_id for your selected enviroment
+* The path to your public key, e.g. "/path/to/private.key"
+
 
 ```
 npm run start
 ```
 
-* visit (localhost:3000)[localhost:3000]
+* Visit [localhost:3000](http://localhost:3000)
 
-
-## Web App Features
-
-* Yodlee Fastlink Implementation
-* Listing a Users Accounts
-* View details of a selected Account
 
 ## Requirements
 
