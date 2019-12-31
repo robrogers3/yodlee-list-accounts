@@ -34,7 +34,7 @@ router.get('/accounts', function(req, res, next) {
     const jsonPath = './accounts.json'
     var path = process.env.API_BASE_PATH + "/accounts"
 
-    if (fs.existsSync(jsonPath)) {
+    if (isDev(req) && fs.existsSync(jsonPath)) {
         const data = loadJSONData(jsonPath)
         res.render('user_accounts', {accounts: JSON.stringify(data), username: req.session.username, title: 'User Accounts'})
         return;
@@ -59,7 +59,7 @@ router.get('/accounts', function(req, res, next) {
 
 router.get('/accounts/:id', function(req, res, next) {
     const jsonPath = `accounts.${req.params.id}.json`
-    if (fs.existsSync(jsonPath)) {
+    if (isDev(req) && fs.existsSync(jsonPath)) {
         const data = loadJSONData(jsonPath)
         res.json(data.account[0])
         return
