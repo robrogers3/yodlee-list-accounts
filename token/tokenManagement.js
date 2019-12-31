@@ -25,7 +25,7 @@ const tokenManagement = {
     },
 
     generateUser: function(username) {
-        const privateKey = PRIVATE_KEY
+        const privateKey = process.env.PRIVATE_KEY
 	const issueTime = Math.floor(Date.now() / 1000)
 	const expiryTime = issueTime + 900
 
