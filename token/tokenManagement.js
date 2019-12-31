@@ -25,7 +25,7 @@ const tokenManagement = {
     },
 
     generateUser: function(username) {
-	const privateKey = fs.readFileSync('./private.key', 'utf-8')
+        const privateKey = fs.readFileSync(process.env.PRIVATE_KEY_PATH, 'utf-8')
 	const issueTime = Math.floor(Date.now() / 1000)
 	const expiryTime = issueTime + 900
 

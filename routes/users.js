@@ -11,14 +11,16 @@ function isDev(req) {
 }
 
 router.get('/', function(req, res, next) {
-    console.log('env???', req.app.get('env'), isDev(req))
+    console.log(req.app.get('env'), isDev(req))
     res.render('user_form.ejs', {title: 'User Form'})
 });
+
 router.post('/', function(req, res, next) {
     req.session.token = tokenManagement.generateUser(req.body.username)
     req.session.username = req.body.username
     res.redirect('/users/link')
 });
+
 router.get('/link', function(req, res, next) {
     res.render('user_link', {
 	title: 'fastlink',
@@ -54,6 +56,7 @@ router.get('/accounts', function(req, res, next) {
 	})
 
 });
+
 router.get('/accounts/:id', function(req, res, next) {
     const jsonPath = `accounts.${req.params.id}.json`
     if (fs.existsSync(jsonPath)) {
@@ -63,7 +66,9 @@ router.get('/accounts/:id', function(req, res, next) {
         //res.render('user_account', {account: JSON.stringify(data.account[0]), username: req.session.username, title: 'User Account'})
         //return;
     }
+
     var path = `${process.env.API_BASE_PATH}/accounts/${req.params.id}?container=${req.query.container}`
+
     superagent
 	.get(path)
 	.set('API-VERSION', '1.1')

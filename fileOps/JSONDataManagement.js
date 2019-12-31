@@ -10,7 +10,6 @@ const storeJSONData = (data, path) => {
 
 const loadJSONData = (path) => {
   try {
-      //return JSON.parse(fs.readFileSync(path, 'utf8'))
       return JSON.parse(fs.readFileSync(path, 'utf8'))
   } catch (err) {
       console.error('loadJsonData failed', err)

@@ -1,12 +1,9 @@
 <%- include('header'); -%>
 <div class="row">
-    <div class="col-lg">
-        <h5 class="mb-3">Step 2: <span class="font-weight-normal">Link an Account to <%= username %>'s Profile</span></h5>
-    </div>
-</div>
-<div class="row">
     <div class="col-sm">
-        <dl class="my-2">
+        <h5 class="mb-0">Step 2: <span class="font-weight-normal">Link an Account</span></h5>
+        <p>Link an account to <%= username %>'s profile</p>
+        <dl class="card bg-light p-2 my-2">
             <dt>Launch FastLink</dt>
             <dd>Launch FastLink by clicking the 'Link Account' button.</dd>
             <dt>Select a Financial Institution</dt>
@@ -23,7 +20,7 @@
     <div class="col-sm">
         <div id="container-fastlink">
             <div style="text-align: center; margin-bottom: 2rem">
-                <input class="btn btn-primary" type="button" id="btn-fastlink" value="Link an Account">
+                <input class="btn btn-primary" type="button" id="btn-fastlink" value="Link Account">
                 <a class="btn btn-primary d-none"  href="/users/accounts" id="close-fastlink">View Linked Accouts</a>
             </div>
         </div>

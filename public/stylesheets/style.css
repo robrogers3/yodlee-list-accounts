@@ -1,3 +1,16 @@
+dt {
+    font-size: 13px;
+}
+dd {
+    font-size: 12px;
+}
+
 .hidden {
     display: none;
+}
+.footer {
+    font-size: 10px;
+}
+td {
+    font-size: 12px;
 }
