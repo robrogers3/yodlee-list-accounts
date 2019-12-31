@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www --ignore 'account*.json'"
+      "start": "node ./bin/www",
+      "dev": "nodemon ./bin/www --ignore 'account*.json'"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -20,5 +21,8 @@
   },
   "devDependencies": {
     "nodemon": "^1.19.3"
+  },
+    "engines": {
+    "node": "13.x"
   }
 }
