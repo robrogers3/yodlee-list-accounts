@@ -4,7 +4,7 @@ const fs = require('fs')
 const tokenManagement = {
 
     generateAdmin: function() {
-	const privateKey = fs.readFileSync(process.env.PRIVATE_KEY_PATH, 'utf-8')
+	const privateKey = process.env.PRIVATE_KEY
 	const issueTime = Math.floor(Date.now() / 1000)
 	const expiryTime = issueTime + 900
 
@@ -25,7 +25,7 @@ const tokenManagement = {
     },
 
     generateUser: function(username) {
-        const privateKey = fs.readFileSync(process.env.PRIVATE_KEY_PATH, 'utf-8')
+        const privateKey = PRIVATE_KEY
 	const issueTime = Math.floor(Date.now() / 1000)
 	const expiryTime = issueTime + 900
 
