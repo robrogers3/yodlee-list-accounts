@@ -25,17 +25,15 @@ npm install
 **You must update the .env file with**
 
 * Your issuer_id for your selected enviroment
-* The path to your public key, e.g. "/path/to/private.key"
 
-
+Then enter this command in the terminal:
 ```
-npm run start
+PRIVATE_KEY=`cat ../path/to/private.key` npm run start
 ```
 
 * Visit [localhost:3000](http://localhost:3000)
 
-
 ## Requirements
 
-* Node
+* NodeJs
 * npm
